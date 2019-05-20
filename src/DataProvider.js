@@ -9,18 +9,17 @@ class DataProvider extends Component {
             recipes: []
         }
     }
-
     getRecipes = (search)=> {
         axios.get(`https://vschool-cors.herokuapp.com?url=http://www.recipepuppy.com/api/?q=${search}`).then(res => {
-          console.log(res.data)
           this.setState({
             recipes: res.data.results
           })
-        })
+        }).catch(function (error) {
+            window.location.reload()
+        });
       }
       
       render() {
-        console.log(this.state.Recipes)
         return (
             <Provider value={{
                 getRecipes: this.getRecipes,
